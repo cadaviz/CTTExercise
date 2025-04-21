@@ -44,7 +44,7 @@ jobs:
 
   generate-test-reports:
     runs-on: ubuntu-latest
-    needs: [tests-core, tests-orders]
+    needs: tests
     permissions:
       contents: read
       actions: read
