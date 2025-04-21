@@ -6,10 +6,12 @@
 
     public class ProductController : ControllerBase
     {
+        private readonly ILogger<ProductController> _logger;
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService) : base()
+        public ProductController(ILogger<ProductController> logger, IProductService productService) : base()
         {
+            _logger = logger;
             _productService = productService;
         }
 

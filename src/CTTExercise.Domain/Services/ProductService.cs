@@ -2,16 +2,19 @@
 {
     using CTTExercise.Domain.Entities;
     using CTTExercise.Domain.Repositories;
+    using Microsoft.Extensions.Logging;
     using System;
     using System.Threading;
     using System.Threading.Tasks;
 
     internal class ProductService : IProductService
     {
+        private readonly ILogger<IProductService> _logger;
         private readonly IProductRepository _productRepository;
 
-        public ProductService(IProductRepository productRepository)
+        public ProductService(ILogger<IProductService> logger, IProductRepository productRepository)
         {
+            _logger = logger;
             _productRepository = productRepository;
         }
 

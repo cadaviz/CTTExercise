@@ -1,9 +1,9 @@
-﻿namespace CTTExercise.WebApi.Requests
+﻿namespace CTTExercise.WebApi.Responses
 {
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
-    public record RegisterProductRequest
+    public record RegisterProductResponse
     {
     }
 }
