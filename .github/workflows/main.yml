@@ -31,6 +31,9 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
+    
+      - name: Clean .NET Environment
+        uses: ./.github/actions/clear-environment
 
       - name: Run tests
         run: dotnet test tests/CTTExercise.Tests --logger "trx;LogFileName=test-results.trx"

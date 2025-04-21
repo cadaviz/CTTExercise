@@ -1,0 +1,18 @@
+name: "Clean .NET Environment"
+description: "Clears old .NET versions and cache"
+runs:
+  using: "composite"
+  steps:
+    - name: 🏗️ .NET SDK install
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '9.0.x'
+        cache: 'false'
+
+    - name: 🔄 Clear NuGet Cache
+      run: dotnet nuget locals all --clear
+      shell: bash
+
+    - name: Remove Old .NET Versions
+      run: sudo apt-get remove -y dotnet-sdk-8.0
+      shell: bash
