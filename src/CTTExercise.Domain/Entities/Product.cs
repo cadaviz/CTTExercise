@@ -5,8 +5,6 @@
 
     public class Product
     {
-        protected Product() { }
-
         public Guid Id { get; protected set; } = Guid.NewGuid();
         public required int Stock { get; init; }
         public required string Description { get; init; }

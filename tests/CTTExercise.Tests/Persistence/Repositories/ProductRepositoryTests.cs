@@ -5,7 +5,7 @@
     using CTTExercise.Domain.Repositories;
     using CTTExercise.Persistence.Repositories;
     using CTTExercise.Persistence.Setup;
-    using CTTExercise.Tests.Shared;
+    using CTTExercise.Tests;
     using FluentAssertions;
     using Microsoft.Extensions.Logging;
     using MongoDB.Driver;
