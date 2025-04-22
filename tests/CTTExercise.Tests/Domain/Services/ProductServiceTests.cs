@@ -4,7 +4,7 @@
     using CTTExercise.Domain.Entities;
     using CTTExercise.Domain.Repositories;
     using CTTExercise.Domain.Services;
-    using CTTExercise.Tests.Shared;
+    using CTTExercise.Tests;
     using FluentAssertions;
     using Microsoft.Extensions.Logging;
     using Moq;

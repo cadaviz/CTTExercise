@@ -3,7 +3,7 @@
     using AutoFixture;
     using CTTExercise.Domain.Entities;
     using CTTExercise.Domain.Services;
-    using CTTExercise.Tests.Shared;
+    using CTTExercise.Tests;
     using CTTExercise.WebApi.Controllers;
     using CTTExercise.WebApi.Requests;
     using CTTExercise.WebApi.Responses;

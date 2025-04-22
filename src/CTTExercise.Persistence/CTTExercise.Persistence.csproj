@@ -12,11 +12,15 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\CTTExercise.Domain\CTTExercise.Domain.csproj" />
+		<ProjectReference Include="..\CTTExercise.Shared\CTTExercise.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
 			<_Parameter1>CTTExercise.Tests</_Parameter1>
+		</AssemblyAttribute>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
 

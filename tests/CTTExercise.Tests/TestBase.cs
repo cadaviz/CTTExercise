@@ -1,4 +1,4 @@
-﻿namespace CTTExercise.Tests.Shared
+﻿namespace CTTExercise.Tests
 {
     using AutoFixture;
 

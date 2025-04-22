@@ -3,6 +3,7 @@
     using CTTExercise.Domain.Entities;
     using CTTExercise.Domain.Repositories;
     using CTTExercise.Persistence.Setup;
+    using CTTExercise.Shared.Extensions;
     using Microsoft.Extensions.Logging;
     using MongoDB.Driver;
     using System;
@@ -32,14 +33,21 @@
             _logger = logger;
         }
 
-        public Task<Product> CreateProductAsync(Product entity, CancellationToken cancellationToken)
+        public async Task<Product> CreateProductAsync(Product entity, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _collection.InsertOneAsync(entity, cancellationToken: cancellationToken);
+
+            _logger.LogDebugIfEnabled("Entity was inserted. Entity='{Entity}'", entity);
+
+            return entity;
         }
 
         public Task<Product?> GetProductByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+#pragma warning disable S1905
+            return _collection.Find(filter => filter.Id == id)
+                              .SingleOrDefaultAsync(cancellationToken) as Task<Product?>;
+#pragma warning restore S1905
         }
     }
 }
