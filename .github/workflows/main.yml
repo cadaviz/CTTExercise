@@ -37,7 +37,6 @@ jobs:
 
       - name: Run tests
         run: dotnet test tests/CTTExercise.Tests --logger "trx;LogFileName=test-results.trx"
-        continue-on-error: true
 
       - name: Publish test results
         if: always()
@@ -63,9 +62,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          pattern: TestResults_*
+          pattern: TestResults*
           merge-multiple: true
-          run-id: ${{ github.event.workflow_run.id }}
 
       - name: Generate report
         uses: dorny/test-reporter@v1
