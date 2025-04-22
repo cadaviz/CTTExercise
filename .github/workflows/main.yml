@@ -65,12 +65,10 @@ jobs:
           pattern: TestResults*
           merge-multiple: true
           run-id: ${{ github.event.workflow_run.id }}
-      - name: List downloaded files
-        run: find . -type f
 
       - name: Generate report
         uses: dorny/test-reporter@v1
         with:
           name: test-reports
-          path: "**/TestResults/*.trx" 
+          path: test-results.trx 
           reporter: dotnet-trx
