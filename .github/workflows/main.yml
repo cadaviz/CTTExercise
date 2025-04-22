@@ -49,6 +49,7 @@ jobs:
 
   generate-test-reports:
     runs-on: ubuntu-latest
+    if: always()
     needs: tests
     permissions:
       contents: read
