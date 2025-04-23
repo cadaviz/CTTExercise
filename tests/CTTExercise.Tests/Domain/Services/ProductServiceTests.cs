@@ -11,13 +11,13 @@
 
     public class ProductServiceTests : TestBase
     {
-        private readonly Mock<ILogger<IProductService>> _loggerMock;
+        private readonly Mock<ILogger<ProductService>> _loggerMock;
         private readonly Mock<IProductRepository> _productRepositoryMock;
         private readonly ProductService _productService;
 
         public ProductServiceTests()
         {
-            _loggerMock = new Mock<ILogger<IProductService>>();
+            _loggerMock = new Mock<ILogger<ProductService>>();
             _productRepositoryMock = new Mock<IProductRepository>();
             _productService = new ProductService(_loggerMock.Object, _productRepositoryMock.Object);
         }
@@ -28,6 +28,10 @@
             // Arrange
             var product = Fixture.Create<Product>();
             var cancellationToken = CancellationToken.None;
+
+            _productRepositoryMock
+                .Setup(repo => repo.CreateProductAsync(product, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(product);
 
             // Act
             var result = await _productService.CreateProductAsync(product, cancellationToken);

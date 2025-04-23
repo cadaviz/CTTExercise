@@ -12,7 +12,7 @@
         private readonly ILogger<IProductService> _logger;
         private readonly IProductRepository _productRepository;
 
-        public ProductService(ILogger<IProductService> logger, IProductRepository productRepository)
+        public ProductService(ILogger<ProductService> logger, IProductRepository productRepository)
         {
             _logger = logger;
             _productRepository = productRepository;
@@ -20,12 +20,15 @@
 
         public Task<Product> CreateProductAsync(Product entity, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _productRepository.CreateProductAsync(entity, cancellationToken);
         }
 
         public Task<Product?> GetProductByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            using (_logger.BeginScope("ProductId: {ProductId}", id))
+            {
+                return _productRepository.GetProductByIdAsync(id, cancellationToken);
+            }
         }
     }
 }
