@@ -29,19 +29,17 @@
         public async Task RegisterProduct_ShouldReturnBadRequest_WhenRequestIsInvalid()
         {
             // Arrange
-            var request = Fixture.Create<RegisterProductRequest>();
+            RegisterProductRequest? request = null;
 
             // Act
             var result = await _controller.RegisterProduct(request, CancellationToken.None);
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeOfType<ProblemDetails>();
+            var badRequestObjectResult =  result.Should().BeOfType<BadRequestObjectResult>().Which;
 
-            var problemDetails = (ProblemDetails)result;
-
-            problemDetails.Should().NotBeNull();
-            problemDetails.Status.Should().Be(StatusCodes.Status400BadRequest);
+            badRequestObjectResult.Should().NotBeNull();
+            badRequestObjectResult.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
         }
 
         [Fact]
@@ -60,12 +58,11 @@
 
             // Assert
             result.Should().NotBeNull();
-            result.Should().BeOfType<CreatedAtActionResult>();
 
-            var createdAtActionResult = (CreatedAtActionResult)result;
+            var createdAtActionResult = result.Should().BeOfType<CreatedAtActionResult>().Which;
             createdAtActionResult.StatusCode.Should().Be(StatusCodes.Status201Created);
             createdAtActionResult.Value.Should().NotBeNull();
-            createdAtActionResult.Value.Should().BeOfType<GetProductResponse>();
+            var registerProductResponse = createdAtActionResult.Value.Should().BeOfType<RegisterProductResponse>().Which;
             createdAtActionResult.RouteValues.Should().NotBeNullOrEmpty();
             createdAtActionResult.RouteValues.Should().ContainKey("id");
 
@@ -73,6 +70,7 @@
             idValue.Should().NotBeNull();
             idValue.Should().NotBe(Guid.Empty);
             idValue.Should().BeOfType<Guid>();
+            idValue.Should().Be(registerProductResponse.Id);
         }
 
         [Fact]
