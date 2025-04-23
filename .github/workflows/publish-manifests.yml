@@ -1,0 +1,25 @@
+name: Publish Kubernetes Manifests
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v3
+
+      - name: Commit YAML to another repo as PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_PAT }}
+          repository: seu-usuario/nome-do-repo-destino
+          base: main
+          branch: add-k8s-manifests
+          title: "Add Kubernetes manifests"
+          body: |
+            Publishing Kubernetes Manifests.
+          commit-message: "chore: add K8s manifests files"
+          path: ./k8s

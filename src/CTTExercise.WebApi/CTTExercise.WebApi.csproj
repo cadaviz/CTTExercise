@@ -16,6 +16,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\CTTExercise.Domain\CTTExercise.Domain.csproj" />
+		<ProjectReference Include="..\CTTExercise.Persistence\CTTExercise.Persistence.csproj" />
 		<ProjectReference Include="..\CTTExercise.Shared\CTTExercise.Shared.csproj" />
 	</ItemGroup>
 

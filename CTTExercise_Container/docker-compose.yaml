@@ -1,0 +1,21 @@
+services:
+  cttexercise-mongodb:
+    image: mongo:latest
+    container_name: cttexercise_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=CttExercise_ProductDB
+    networks:
+      - cttexercise_network
+    restart: always
+
+networks:
+  cttexercise_network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

@@ -7,9 +7,14 @@
     using CTTExercise.WebApi.Validators;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using System.Net.Mime;
 
+    [ApiController]
+    [Route(controllerName)]
+    [Produces(MediaTypeNames.Application.Json)]
     public class ProductController : CTTExercise.WebApi.Controllers.ControllerBase
     {
+        private const string controllerName = "products";
         private readonly IProductService _productService;
 
         public ProductController(ILogger<ProductController> logger, IProductService productService) : base(logger)

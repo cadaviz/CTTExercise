@@ -1,0 +1,21 @@
+.dockerignore
+.env
+.git
+.gitignore
+.vs
+.vscode
+*/bin
+*/obj
+**/.toolstarget
+**/out/
+**/TestResults/
+**/reports/
+**/docker-compose.*
+/Makefile
+/Jenkinsfile
+
+# files
+Dockerfile*
+**/*.md
+**/deploy/Docker/*Dockerfile*
+!specs/.git/
