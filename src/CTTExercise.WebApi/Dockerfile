@@ -12,10 +12,13 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/CTTExercise.WebApi/CTTExercise.WebApi.csproj", "src/CTTExercise.WebApi/"]
-RUN dotnet restore "./src/CTTExercise.WebApi/CTTExercise.WebApi.csproj"
+COPY ["CTTExercise.WebApi/CTTExercise.WebApi.csproj", "CTTExercise.WebApi/"]
+COPY ["CTTExercise.Domain/CTTExercise.Domain.csproj", "CTTExercise.Domain/"]
+COPY ["CTTExercise.Persistence/CTTExercise.Persistence.csproj", "CTTExercise.Persistence/"]
+COPY ["CTTExercise.Shared/CTTExercise.Shared.csproj", "CTTExercise.Shared/"]
+RUN dotnet restore "CTTExercise.WebApi/CTTExercise.WebApi.csproj"
 COPY . .
-WORKDIR "/src/src/CTTExercise.WebApi"
+WORKDIR "/src/CTTExercise.WebApi"
 RUN dotnet build "./CTTExercise.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage

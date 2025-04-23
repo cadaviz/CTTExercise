@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-api
+  template:
+    metadata:
+      labels:
+        app: product-api
+    spec:
+      containers:
+        - name: product-api
+          image: cadaviz/product-api:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: MongoDb__ConnectionString
+              value: mongodb://mongo:27017
+            - name: MongoDb__Database
+              value: ProductDb

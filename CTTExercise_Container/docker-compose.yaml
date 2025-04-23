@@ -1,0 +1,38 @@
+services:
+  cttexercise-mongodb:
+    image: mongo:latest
+    container_name: cttexercise_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=CttExercise_ProductDB
+    networks:
+      - cttexercise_network
+    restart: always
+    
+  cttexercise-app:
+    image: cadaviz/cttexercise:latest
+    container_name: cttexercise_app
+    build:
+      context: ../src
+      dockerfile: CTTExercise.WebApi/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - MONGO_DB_CONNECTION_STRING=mongodb://cttexercise-mongodb:27017
+    depends_on:
+      - cttexercise-mongodb
+    networks:
+      - cttexercise_network
+    restart: always
+    
+networks:
+  cttexercise_network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

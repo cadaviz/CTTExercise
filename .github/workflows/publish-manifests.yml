@@ -1,0 +1,22 @@
+name: Publish Kubernetes Manifests
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v3
+
+      - name: Create PR with Kubernetes manifests
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: add Kubernetes manifests"
+          branch: add-k8s-manifests
+          title: "Add Kubernetes manifests"
+          body: |
+            This PR contains the Kubernetes manifests for deploying the application.

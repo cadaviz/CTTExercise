@@ -1,6 +1,12 @@
 
 namespace CTTExercise.WebApi
 {
+    using CTTExercise.Domain.Setup;
+    using CTTExercise.Persistence.Setup;
+    using Microsoft.Extensions.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     public class Program
     {
         public static void Main(string[] args)
@@ -12,6 +18,8 @@ namespace CTTExercise.WebApi
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            ConfigureServices(builder.Services, builder.Configuration);
 
             var app = builder.Build();
 
@@ -29,6 +37,12 @@ namespace CTTExercise.WebApi
             app.MapControllers();
 
             app.Run();
+        }
+
+        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        {
+            SetupPersistence.ConfigurePersistence(services, configuration);
+            SetupDomain.ConfigureDomain(services, configuration);
         }
     }
 }
